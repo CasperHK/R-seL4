@@ -12,9 +12,9 @@ R-seL4 是一個結合了 seL4 數學證明嚴謹性與 Redox OS 「萬物皆 UR
 ### 1. 統一資源定位 (Everything is a URL)
 受 Redox OS 啟發，R-seL4 消除了「本地存取」與「網絡請求」的底層差異：
 
-* 本地硬件： pcie://bus0/dev0
-* 文件系統： file:///home/user/data.json
-* AI 服務流： grpc://model-server/inference
+* 本地硬件： `pcie://bus0/dev0`
+* 文件系統： `file:///home/user/data.json`
+* AI 服務流： `grpc://model-server/inference`
 * 優勢： AI 代理只需處理統一的 ResourceGate 接口，極大簡化了跨設備遷移與異構資源調度的難度。
 
 ### 2. 基於 Capability 的安全性 (Zero-Trust by Design)
