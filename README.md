@@ -7,7 +7,9 @@ R-seL4 是一個結合了 seL4 數學證明嚴謹性與 Redox OS 「萬物皆 UR
 透過將所有系統資源（從記憶體分頁到遠端推理模型）抽象化為統一的 URL 協定，R-seL4 為 AI 時代提供了最精確的權限控制與資源定位機制。
 
 ------------------------------
-## ✨ 核心架構優勢## 1. 統一資源定位 (Everything is a URL)
+## ✨ 核心架構優勢
+
+### 1. 統一資源定位 (Everything is a URL)
 受 Redox OS 啟發，R-seL4 消除了「本地存取」與「網絡請求」的底層差異：
 
 * 本地硬件： pcie://bus0/dev0
@@ -15,13 +17,13 @@ R-seL4 是一個結合了 seL4 數學證明嚴謹性與 Redox OS 「萬物皆 UR
 * AI 服務流： grpc://model-server/inference
 * 優勢： AI 代理只需處理統一的 ResourceGate 接口，極大簡化了跨設備遷移與異構資源調度的難度。
 
-## 2. 基於 Capability 的安全性 (Zero-Trust by Design)
+### 2. 基於 Capability 的安全性 (Zero-Trust by Design)
 繼承 seL4 的核心設計，R-seL4 採用「能力訪問控制」：
 
 * 進程預設無權限，必須持有不可偽造的 Capability Token。
 * 所有的 URL 請求必須通過內核的 Capability Filter，確保資源隔離。
 
-## 3. Rust 形式化驗證 (Verus Integration)
+### 3. Rust 形式化驗證 (Verus Integration)
 本專案使用 Verus 工具鏈對內核關鍵代碼進行形式化驗證：
 
 * 內存安全： 在編譯期消除 Buffer Overflow、Use-after-free 等傳統漏洞。
@@ -38,28 +40,29 @@ R-seL4 是一個結合了 seL4 數學證明嚴謹性與 Redox OS 「萬物皆 UR
 | Agent-Link | 專為 AI 代理設計的輕量級通訊層 | Rust, async-executor |
 
 ------------------------------
-## 🚀 快速啟動## 前置要求
+## 🚀 快速啟動
 
+### 前置要求
 * Rust Nightly (最新版本)
 * Verus (用於靜態驗證)
 * QEMU (RISC-V 64 模擬環境)
 
-## 編譯與驗證
+### 編譯與驗證
 
-### 執行內核邏輯的數學證明
-```bash
-cargo verus --verify-core
-```
+1. 執行內核邏輯的數學證明
+   ```bash
+   cargo verus --verify-core
+   ```
 
-### 編譯微核心
-```bash
-cargo build --release --target riscv64gc-unknown-none-elf
-```
+2. 編譯微核心
+   ```bash
+   cargo build --release --target riscv64gc-unknown-none-elf
+   ```
 
-### 啟動模擬環境
-```bash
-make qemu
-```
+3. 啟動模擬環境
+   ```bash
+   make qemu
+   ```
 
 ------------------------------
 ## 📊 應用場景
